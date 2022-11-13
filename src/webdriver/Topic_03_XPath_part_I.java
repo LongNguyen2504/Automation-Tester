@@ -8,7 +8,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_00_Template {
+public class Topic_03_XPath_part_I {
 	WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
 	String osName = System.getProperty("os.name");
@@ -29,6 +29,11 @@ public class Topic_00_Template {
 		
 	}
 	@Test public void TC_01_() {
+		driver.get("https://automationfc.github.io/basic-form/");
+		
+		System.out.println("Text h5 = " + driver.findElement(By.xpath("//h5[@id='nested']")).getText());
+		//System.out.println("Text h5 = " + driver.findElement(By.xpath('//h5[@id="nested"]')).getText());
+		//'//h5[@id="nested"]'
 		  
 		  }
 	@Test public void TC_02_() {
