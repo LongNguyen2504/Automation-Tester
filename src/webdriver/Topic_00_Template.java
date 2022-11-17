@@ -26,11 +26,14 @@ public class Topic_00_Template {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
 		// Open browser
+		//Tương tác qua Browser thì sẽ thông qua WebDriver driver
+		//Tương tác qua Element thì sẽ thông qua WebElement element
 		
 	}
 	@Test public void TC_01_() {
+		
 		  
-		  }
+	  }
 	@Test public void TC_02_() {
 		  
 	  }
