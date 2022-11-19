@@ -67,6 +67,14 @@ public class Topic_00_Template {
 	@Test public void TC_12_() {
 		  
 	  }
+	public void sleepInSecond(long second) {
+		try {
+			Thread.sleep(second*1000); // chờ load trang sau khi click -> thư viện của java
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());;
+		}
+	}
 	
 	
 	
