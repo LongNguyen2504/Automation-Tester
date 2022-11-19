@@ -40,7 +40,8 @@ public class Topic_07_Dropdown {
 		
 		
 	}
-	@Test public void TC_01_Default_Dropdown() {
+	@Test 
+	public void TC_01_Default_Dropdown() {
 		int randNumber = rand.nextInt(9999);
 		driver.get("https://demo.nopcommerce.com/");
 		sleepInSecond(3);
