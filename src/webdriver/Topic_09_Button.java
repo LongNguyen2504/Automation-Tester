@@ -1,14 +1,18 @@
 package webdriver;
+
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.openqa.selenium.support.Color;
 
-public class Topic_00_Template {
+
+public class Topic_09_Button {
 	WebDriver driver;
 	
 	
@@ -33,7 +37,30 @@ public class Topic_00_Template {
 		
 	}
 	@Test 
-	public void TC_01_() {
+	public void TC_01_Fahasa() {
+		driver.get("https://www.fahasa.com/customer/account/create");
+		sleepInSecond(2);
+		//qua tab login
+		driver.findElement(By.cssSelector("li.popup-login-tab-login")).click();
+		sleepInSecond(1);
+		
+		//veirfy button đăng ký đang disable
+		Assert.assertFalse(driver.findElement(By.cssSelector("button.fhs-btn-login")).isEnabled());
+		//input mail pass
+		driver.findElement(By.cssSelector("input#login_username")).sendKeys("dam@gmail.com");
+		driver.findElement(By.cssSelector("input#login_password")).sendKeys("123123");
+		sleepInSecond(1);
+		//verify enable
+		Assert.assertTrue(driver.findElement(By.cssSelector("button.fhs-btn-login")).isEnabled());
+		
+		//verify button background color
+		String bgColor = driver.findElement(By.cssSelector("button.fhs-btn-login")).getCssValue("background-color");
+		
+		//rgbaColor convert to hexa
+		String hexaColor = Color.fromString(bgColor).asHex().toUpperCase();
+		
+		//verify bgcolor
+		Assert.assertEquals(hexaColor,"#C92127");
 		
 		  
 	  }
