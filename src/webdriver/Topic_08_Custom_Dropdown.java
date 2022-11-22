@@ -99,13 +99,13 @@ public class Topic_08_Custom_Dropdown {
 	
 	}
 
-	//@Test 
+	@Test 
 	public void TC_02_JQuerry_02() {
 		  
 		driver.get("https://www.honda.com.vn/o-to/du-toan-chi-phi");
 		sleepInSecond(2);
 		
-		scrollToElement("img.image-background");
+		//scrollToElement("img.image-background");
 		
 		selectCustomDropList("button#selectize-input", "div.dropdown-menu a", "CITY G");
 		assertEquals(driver.findElement(By.cssSelector("button#selectize-input")).getText(), "CITY G");
@@ -138,7 +138,9 @@ public class Topic_08_Custom_Dropdown {
 		
 		  
 	  }
-	@Test public void TC_05_React_Ediable() {
+	
+	//@Test 
+	public void TC_05_React_Ediable() {
 		driver.get("https://react.semantic-ui.com/maximize/dropdown-example-search-selection/");
 		sleepInSecond(2);
 		

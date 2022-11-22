@@ -69,7 +69,7 @@ public class Topic_06_Web_Element {
 		
 		
 		String nametag = elmt.getTagName();//Get the tag name of this element. -> used with locator id,class,name,cssSelector
-		driver.findElement(By.xpath("//" + nametag + "@id='email'")); //case of using nametag to find element
+		driver.findElement(By.xpath("//" + nametag + "[@id='email']")); //case of using nametag to find element
 		
 		elmt.getText(); //get text of elemnt(error/success message,...) /**
 		//note -> text nằm bên ngoài element thì dùng getText , bên trong dùng attribute
