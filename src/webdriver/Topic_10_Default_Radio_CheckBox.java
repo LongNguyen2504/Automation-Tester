@@ -139,7 +139,7 @@ public class Topic_10_Default_Radio_CheckBox {
 				 checkBox.click(); // uncheck
 				 Assert.assertFalse(checkBox.isSelected());
 			 }else {
-				 checkBox.click();
+				 checkBox.click(); //check
 				 Assert.assertTrue(checkBox.isSelected());
 			}
 			 

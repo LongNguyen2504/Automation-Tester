@@ -88,28 +88,46 @@ public class Topic_13_User_Interraction_Actions {
 		//khi click vào link cần chọn vì nếu không wait sẽ k kịp load sub menu để click (do trình biên dịch xử lý nhanh hơn thời gian load sub menu khi hover) -> ra lỗi
 		//could not be scroll into view
 		sleepInSecond(2);
+		
+		//H
 		Assert.assertEquals(driver.findElement(By.xpath("//span[@class='breadcrumbs-crumb']")).getText(), "Kids Home Bath");
-		// Lưu ý : dùng WebElement để click là tốt nhất vì sẽ giống với native action -> giống với action của user nhất
+		// Lưu ý : dùng WebElement để click là tốt nhất vì sẽ giống với native event -> giống với action của user nhất
 	}
-	//@Test 
+	@Test 
 	public void TC_03_Fahasa() {
 		driver.get("https://www.fahasa.com/");
 		sleepInSecond(6);
 		driver.findElement(By.cssSelector("div#desktopBannerWrapped button#moe-dontallow_button")).click(); // hủy pop up subcribe
 		
-		sleepInSecond(7);
+		sleepInSecond(6);
+		//Do popup nằm trong iframe nên phải tìm iframe và switch sang để bắt element
+		WebElement iframePopup = driver.findElement(By.xpath("//iframe[contains(@id,'moe-onsite')]"));
 		
+		driver.switchTo().frame(iframePopup);
+//		action.moveToElement(driver.findElement(By.cssSelector("div.root-container button#close-icon img"))).perform();
+		driver.findElement(By.cssSelector("div.root-container button#close-icon img")).click(); //hủy pop up khuyến mãi
+		//leaving a frame
+		driver.switchTo().defaultContent();
+		action.moveToElement(driver.findElement(By.cssSelector("span.icon_menu"))).perform();
+		sleepInSecond(3);
+		
+		driver.findElement(By.xpath("//div[@class='fhs_column_stretch']//a[text()='Kỹ Năng Sống']")).click();
+		
+		//Hàm get text của WebElement sẽ trả về text hiển thị y chang trên UI -> khi assert phải cho expected text là copy text của UI
+		Assert.assertEquals(driver.findElement(By.xpath("//ol[@class='breadcrumb']/li/strong")).getText(), "KỸ NĂNG SỐNG");
+		
+		
+		// hàm isDisplay với element có text = '' thì text này phải là text của HTML để có thể tìm đến chính xác element và verify
+		Assert.assertTrue(driver.findElement(By.xpath("//ol[@class='breadcrumb']/li/strong[text()='Kỹ năng sống']")).isDisplayed());
 		//explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='root-container']//button[@id='close-icon']")));
-		//action.moveToElement(driver.findElement(By.cssSelector("div.root-container button#close-icon img"))).perform();
 		
 		
 	
-		//driver.findElement(By.cssSelector("div.root-container button#close-icon img")).click(); //hủy pop up khuyến mãi
 		
 		//jspExecutor.executeScript("arguments[0].click();", driver.findElement(By.xpath("//div[@class='root-container']//button[@id='close-icon']//img")));
 		//action.click(driver.findElement(By.xpath("//div[@class='root-container']//button[@id='close-icon']//img"))).perform();
 		//  
-	  }
+	}
 	//@Test
 	public void TC_04_click_hold_element() {
 		driver.get("https://automationfc.github.io/jquery-selectable/");
@@ -226,7 +244,7 @@ public class Topic_13_User_Interraction_Actions {
 		
 		  
 	  }
-	@Test 
+	//@Test 
 	public void TC_08_Drag_Drop_HTML4() {
 		driver.get("https://automationfc.github.io/kendo-drag-drop/");
 		sleepInSecond(3);

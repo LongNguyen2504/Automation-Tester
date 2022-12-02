@@ -105,7 +105,7 @@ public class Topic_08_Custom_Dropdown {
 		driver.get("https://www.honda.com.vn/o-to/du-toan-chi-phi");
 		sleepInSecond(2);
 		
-		//scrollToElement("img.image-background");
+		scrollToElement("img.image-background");
 		
 		selectCustomDropList("button#selectize-input", "div.dropdown-menu a", "CITY G");
 		assertEquals(driver.findElement(By.cssSelector("button#selectize-input")).getText(), "CITY G");
@@ -173,7 +173,7 @@ public class Topic_08_Custom_Dropdown {
 		List<WebElement> listItem =  driver.findElements(By.cssSelector(childLocator));
 		// duyệt vòng lặp để get text từng item để so sánh với text đang tìm -> tìm thấy thì click vào và break
 		for (WebElement webElement : listItem) {
-			if(webElement.getText().equals(value)) {
+			if(webElement.getText().equals(value)) { // send value mình cần search vào để tìm ra đúng kết quả trong droplist
 				webElement.click();
 				break; // sau khi click dc element thì html tree sẽ ẩn đi do đó cần break;
 			}
