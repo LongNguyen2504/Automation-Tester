@@ -93,7 +93,7 @@ public class Topic_13_User_Interraction_Actions {
 		Assert.assertEquals(driver.findElement(By.xpath("//span[@class='breadcrumbs-crumb']")).getText(), "Kids Home Bath");
 		// Lưu ý : dùng WebElement để click là tốt nhất vì sẽ giống với native event -> giống với action của user nhất
 	}
-	@Test 
+	//@Test 
 	public void TC_03_Fahasa() {
 		driver.get("https://www.fahasa.com/");
 		sleepInSecond(6);
@@ -196,7 +196,7 @@ public class Topic_13_User_Interraction_Actions {
 		List<WebElement> listSelected = driver.findElements(By.cssSelector("ol#selectable li.ui-selected"));
 		Assert.assertEquals(listSelected.size(), 3);
 	  }
-	//@Test 
+	@Test 
 	public void TC_06_doubleClick() {
 		driver.get("https://automationfc.github.io/basic-form/index.html");
 		sleepInSecond(3);
@@ -209,7 +209,7 @@ public class Topic_13_User_Interraction_Actions {
 			jspExecutor.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath("//button[text()=\"Double click me\"]")));
 		// else là chrome sẽ tự scroll và click
 		}
-		//double click
+		//double click của user interraction thì cần phải scroll xún để UI hiển thị element -> nếu dùng driver.click thì k cần scroll nhưng chỉ single click
 		action.doubleClick(driver.findElement(By.xpath("//button[text()=\"Double click me\"]"))).perform(); 
 		
 		//Verify text
