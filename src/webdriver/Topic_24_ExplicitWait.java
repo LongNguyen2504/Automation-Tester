@@ -46,7 +46,7 @@ public class Topic_24_ExplicitWait {
 		
 	}
 	//Coi thêm trong google doc của thầy
-	@Test 
+	//@Test 
 	public void TC_01_VisibilityPracticeCase() {
 		
 		driver.get("https://automationfc.github.io/dynamic-loading/");
@@ -59,7 +59,7 @@ public class Topic_24_ExplicitWait {
 		Assert.assertEquals(driver.findElement(By.cssSelector("div#finish>h4")).getText(), "Hello World!");
 		  
 	  }
-	@Test 
+	//@Test 
 	public void TC_02_InvisibilityPracticeCase() {
 		
 		
@@ -76,22 +76,88 @@ public class Topic_24_ExplicitWait {
 		  
 	  }
 	
-	@Test
-	public void TC_04_() {
+	//@Test
+	public void TC_06_Ajax_Loading() {
+		driver.get("https://demos.telerik.com/aspnet-ajax/ajaxloadingpanel/functionality/explicit-show-hide/defaultcs.aspx");
+		explicitWait = new WebDriverWait(driver, 15);
+		
+		//Wait khung dateTime dc hiển thị vì vừa load page thì cần time để ajax hiển thị đầy đủ dateTime
+		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.RadCalendar ")));
+		
+		//Verify selected Date là chưa có ngày dc chọn
+		Assert.assertEquals(driver.findElement(By.cssSelector("span#ctl00_ContentPlaceholder1_Label1")).getText(), "No Selected Dates to display.");
+		
+		//Wait ngày 10 ở  dateTime dc phép click
+		explicitWait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("td[title='Saturday, December 10, 2022']")));
+		
+		//Click chọn ngày 10
+		driver.findElement(By.cssSelector("td[title='Saturday, December 10, 2022']")).click();
+		
+		//Wait laoding icon biến mất invisibility
+		explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[id*='RadAjaxLoadingPanel1ctl00'] div.raDiv")));
+		
+		//Wait ngày 10 vừa dc chọn là dc phép click trở lại (vì khi chọn ngày 10 thì ngày 10 đã dc chọn trong html chứ k chờ loading icon chạy xong)
+		//Làm thêm step này để test case càng chi tiết thì càng tăng sự ổn định
+		explicitWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[@class='rcSelected']/a[text()='10']")));
+		
+		//Verify span text selected dates đã hiển thị và đúng text 
+		Assert.assertEquals(driver.findElement(By.cssSelector("span#ctl00_ContentPlaceholder1_Label1")).getText(), "Saturday, December 10, 2022");
+		
+		//Note : Nếu gán sẵn 1 webelement selectedDate = driver.findElement(By.cssSelector("span#ctl00_ContentPlaceholder1_Label1"))
+		//Và apply biến selectedDate cho 2 line 88 và 104 thì sau khi run sẽ bị throw lỗi staleElementException
+		//=> nghĩa là tại line 104 đã k còn tìm thấy locator span trong html nữa mặc dù cùng 1 locator ở line 88
+		//=> Do sau khi pick date thì ajax đã refresh cái pickDate (k phải refresh cả page) -
+		//> dẫn đến ajax update lại các locator có liên quan trong đó có locator span#ctl00_ContentPlaceholder1_Label1
+		
+		
 		  
 	  }
+	@Test 
+	public void TC_07_Upload_File() {
+		String ct1 = "ct1.png";
+		String ct2 = "ct2.png";
+		String uploadFilePathCt1 = projectPath + "\\uploadFile\\" + ct1;
+		String uploadFilePathCt2 = projectPath + "\\uploadFile\\" + ct2;
+		driver.get("https://gofile.io/uploadFiles");
+		explicitWait = new WebDriverWait(driver, 15);
+		//Wait cho button Add Files visible
+		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div#rowUploadButton button")));
+		
+		//Sendkey và upload file vào element input[@type='file']
+		driver.findElement(By.cssSelector("input[type='file']")).sendKeys(uploadFilePathCt1 + "\n" + uploadFilePathCt2);
+		
+		//Wait bar loading process của các file biến mất -> dùng invisibility của elements với locator chung của các file
+		explicitWait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.cssSelector("div#rowUploadProgress-list div.progress-bar"))));
+		
+		//Wait cho message successfully dc visible
+		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h5[text()='Your files have been successfully uploaded']")));
+		
+		//Verify message thành công(phải có bước wait chờ message này hiển thị trước khi verify)
+		Assert.assertTrue(driver.findElement(By.xpath("//h5[text()='Your files have been successfully uploaded']")).isDisplayed());
+		
+		//Wait + click cho show file button dc clickable ()
+		//Do hàm method elementToBeClickable sẽ trả về webElement khi nó đã clickable nên có thể viết gộp như này
+		explicitWait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button#rowUploadSuccess-showFiles"))).click();
+		
+		//Wait + verify : cho file name vs btn dowload hiển thị
+		Assert.assertTrue(explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='ct1.png']/parent::a/parent::div/following-sibling::div//button[@id='contentId-download']"))).isDisplayed());
+		Assert.assertTrue(explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='ct2.png']/parent::a/parent::div/following-sibling::div//button[@id='contentId-download']"))).isDisplayed());
+	
+		//Wait + verify : cho file name vs btn play hiển thị
+		Assert.assertTrue(explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='ct1.png']/parent::a/parent::div/following-sibling::div//button[contains(@class,'contentPlay')]"))).isDisplayed());
+		Assert.assertTrue(explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='ct2.png']/parent::a/parent::div/following-sibling::div//button[contains(@class,'contentPlay')]"))).isDisplayed());
+		
+		
+	
+	
+	
+	
+	}
 	@Test 
 	public void TC_05_() {
 		  
 	  }
-	@Test 
-	public void TC_06_() {
-		  
-	  }
-	@Test 
-	public void TC_07_() {
-		  
-	  }
+	
 	@Test 
 	public void TC_08_() {
 		  
