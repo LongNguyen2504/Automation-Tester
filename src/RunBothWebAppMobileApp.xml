@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="web and mobile"> 
+	<suite-files>
+		<suite-file path="RunOnWebApp.xml"></suite-file>
+		<suite-file path="RunOnMobileApp.xml"></suite-file>
+	</suite-files> 
+	
+
+	 
+</suite> 
+
+
+
+
+
+
+<!--XML này demo cách chạy nhiều level testing (Web/mobile/API) trong 1 dự án automation test trong cùng 1 framework thì có thể nhóm các testscript của các level vào từng group - 
+khi chạy thì chỉ cần filter ra các group name -> Thực tế không nên làm như thế này vì rất khó maintain-->

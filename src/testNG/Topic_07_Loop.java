@@ -28,8 +28,8 @@ public class Topic_07_Loop {
 
 
 	@Test(invocationCount = 3) // số lần loop của method này
-	public void TC_01_LoginToSystem(String username, String password) {
-		driver.get("http://live.techpanda.org/index.php/customer/account/login/");
+	public void TC_01_LoginToSystem() {
+		driver.get("http://live.techpanda.org/index.php/customer/account/create/");
 
 		driver.findElement(By.id("firstname")).sendKeys("Automation");
 		driver.findElement(By.id("lastname")).sendKeys("FC");
@@ -43,7 +43,7 @@ public class Topic_07_Loop {
 		
 		
 		
-		Assert.assertTrue(driver.findElement(By.xpath("li[@ckass='success-msg']//span[text()='Thank you for registering with Main Website Store']"))
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='success-msg']//span[text()='Thank you for registering with Main Website Store.']"))
 				.isDisplayed());
 		
 		
@@ -59,7 +59,7 @@ public class Topic_07_Loop {
 
   @AfterClass
 	public void afterClass() {
-		driver.quit();
+		//driver.quit();
 	}
 
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="mobile app"> 
+	
+  	<test name="Run on mobile app">
+  		<classes>
+  			<class name="facebook.mobileapp.Post_01"></class>
+  		</classes>
+  	</test>
+  	
+
+	 
+	 
+</suite> 
+
+
+
+
+
+
+<!--Thứ tự suite>test(này là test suit)>classes-groups(groups>run>include-exclude)-packages(packages>packages)>class>methods>method -->
