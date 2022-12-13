@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite parallel="tests" name="Suite" thread-count="3"> <!--demo parallel| thực tế chỉ nên dùng parallel ='tests' vì parallel methods sẽ tốn nhiều thời gian implement @BeforeMethod -->
+<!--| threadcount tương ứng với số tests chạy 1 lúc-->
+<!--Việc chạy parallel trên 1 máy tính không ý nghĩa nhiều-> chiếm dụng phần cứng máy tính,chiếm chuột,tài nguyên-->
+<!--Nên phân tán việc parallel trên Docker(nếu dùng 1 máy),-->
+	<!--Global parameter goes here-->
+	<parameter name="environment" value="live"></parameter> <!--environment = live | dev | test-->
+  	<test name="Test Browser Parameter on Firefox">
+  		<parameter name="browser" value="firefox" />
+    	<classes>
+    		<class name="testNG.Topic_06_Parameter_Environment" />
+    	</classes>	
+	</test>
+	<test name="Test Browser Parameter on Chrome">
+		<parameter name="browser" value="chrome" />
+    	<classes>
+    		<class name="testNG.Topic_06_Parameter_Environment" />
+    	</classes>	
+	</test>
+	<test name="Test Browser Parameter on Edge">
+		<parameter name="browser" value="edge" />
+    	<classes>
+    		<class name="testNG.Topic_06_Parameter_Environment" />
+    	</classes>	
+	</test>
+<!--		<groups>
+		  	<run>
+			<include name="admin_1"></include>
+			</run>
+		</groups>
+		<packages>
+			<package name="tiki.admin" />
+		</packages>-->
+  	
+  	
+
+	 
+	 
+</suite> 
+
+
+
+
+
+
+<!--Thứ tự suite>test(này là test suit)>classes-groups(groups>run>include-exclude)-packages(packages>packages)>class>methods>method -->
