@@ -6,7 +6,7 @@
 <!--Nên phân tán việc parallel trên Docker(nếu dùng 1 máy),-->
 	<!--Global parameter goes here-->
 	<parameter name="environment" value="live"></parameter> <!--environment = live | dev | test-->
-  	<test name="Test Browser Parameter on Firefox">
+	<test name="Test Browser Parameter on Firefox">
   		<parameter name="browser" value="firefox" />
     	<classes>
     		<class name="testNG.Topic_06_Parameter_Environment" />
@@ -24,6 +24,22 @@
     		<class name="testNG.Topic_06_Parameter_Environment" />
     	</classes>	
 	</test>
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- Demo listener forpackage	-->
+<!--	
+	<listeners>
+		<listener class-name="listener.ExtendReportListener"></listener>
+		</listeners> 
+<!Demo listener forpackage	-->	
+	
+
 <!--		<groups>
 		  	<run>
 			<include name="admin_1"></include>
